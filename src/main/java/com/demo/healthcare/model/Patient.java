@@ -1,9 +1,6 @@
 package com.demo.healthcare.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Patient {
@@ -13,6 +10,14 @@ public class Patient {
     private Long id;
     private String name;
     private int age;
+
+    @OneToOne
+    @JoinColumn(name = "medical_record")
+    private MedicalRecord medicalRecord;    // Patient is Not the Owning side
+
+    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;     // Patient is the Owning side because the FK resides in the Patient table in db
 
     public Patient() {
     }
@@ -46,12 +51,19 @@ public class Patient {
         this.age = age;
     }
 
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                '}';
+    public MedicalRecord getMedicalRecord() {
+        return medicalRecord;
+    }
+
+    public void setMedicalRecord(MedicalRecord medicalRecord) {
+        this.medicalRecord = medicalRecord;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 }
