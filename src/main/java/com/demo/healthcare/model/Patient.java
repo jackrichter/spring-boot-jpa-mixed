@@ -11,11 +11,11 @@ public class Patient {
     private String name;
     private int age;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)        // The default Fetch Type is Eager for OneToOne
     @JoinColumn(name = "medical_record")
     private MedicalRecord medicalRecord;    // Patient is Not the Owning side
 
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.PERSIST},  fetch = FetchType.LAZY)    // The default is Eager for ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;     // Patient is the Owning side because the FK resides in the Patient table in db
 

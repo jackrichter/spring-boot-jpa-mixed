@@ -8,7 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 //@Component
-public class JpaEntityManagerDemoRefresh implements CommandLineRunner {
+public class JpaEntityManagerDemoClearAndFlush implements CommandLineRunner {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -16,12 +16,15 @@ public class JpaEntityManagerDemoRefresh implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        Patient patient = new Patient("John Doe", 30);
+        Patient patient = new Patient("John Doe" , 30);
         entityManager.persist(patient);
+        patient.setName("Update 1");
+        entityManager.flush();
+        patient.setAge(33);
 
-       patient.setName("Update 1");     // Does not update Name
-       entityManager.refresh(patient);  // Database state is set on patient
+        entityManager.clear();
+        patient.setName("Update 2");
 
-       patient.setAge(155);             // Does update age
+        // MORE OPERATIONS
     }
 }
