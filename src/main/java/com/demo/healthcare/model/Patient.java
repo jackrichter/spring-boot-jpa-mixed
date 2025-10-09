@@ -11,6 +11,9 @@ public class Patient {
     private String name;
     private int age;
 
+    @Embedded
+    private Address address;
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)        // The default Fetch Type is Eager for OneToOne
     @JoinColumn(name = "medical_record")
     private MedicalRecord medicalRecord;    // Patient is Not the Owning side
@@ -49,6 +52,14 @@ public class Patient {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public MedicalRecord getMedicalRecord() {
