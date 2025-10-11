@@ -17,6 +17,9 @@ public class Doctor {
 //    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     private List<Patient> patients;
 
+    @OneToMany(mappedBy = "doctorId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Prescription> prescriptions;
+
     public Doctor() {
     }
 

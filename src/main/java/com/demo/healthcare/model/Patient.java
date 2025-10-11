@@ -2,6 +2,8 @@ package com.demo.healthcare.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Patient {
 
@@ -21,6 +23,9 @@ public class Patient {
     @ManyToOne(cascade = {CascadeType.PERSIST},  fetch = FetchType.LAZY)    // The default is Eager for ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;     // Patient is the Owning side because the FK resides in the Patient table in db
+
+    @OneToMany(mappedBy = "patientId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Prescription> prescriptions;
 
     public Patient() {
     }
