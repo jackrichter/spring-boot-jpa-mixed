@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+//@Component
 public class CompositeKeyDemo implements CommandLineRunner {
 
     private final DoctorRepository doctorRepository;

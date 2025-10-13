@@ -48,6 +48,9 @@ public class Patient {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @Version                // For Optimistic Locking
+    private int version;
+
     public Patient() {
     }
 
