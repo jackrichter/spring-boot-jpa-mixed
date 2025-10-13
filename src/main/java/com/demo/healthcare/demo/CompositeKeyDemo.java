@@ -3,8 +3,10 @@ package com.demo.healthcare.demo;
 import com.demo.healthcare.model.*;
 import com.demo.healthcare.repository.*;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +32,9 @@ public class CompositeKeyDemo implements CommandLineRunner {
         Patient alice = new Patient("Alice Johnson", 30);
         Address address = new Address("101 Main St.", "Springfield", "IL", "873643");
         alice.setAddress(address);
+        byte[] imageData = Files.readAllBytes(new ClassPathResource("/images/img.png").getFile().toPath());
+        alice.setProfilePicture(imageData);
+        alice.setGender(Gender.FEMALE);
         alice.setDoctor(drSmith);
 
         MedicalRecord aliceRecord = new MedicalRecord("Allergic to penicillin");
