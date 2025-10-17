@@ -1,6 +1,7 @@
 package com.demo.healthcare.demo;
 
 import com.demo.healthcare.model.Doctor;
+import com.demo.healthcare.model.Gender;
 import com.demo.healthcare.model.Patient;
 import com.demo.healthcare.repository.DoctorRepository;
 import com.demo.healthcare.repository.PatientRepository;
@@ -32,11 +33,11 @@ public class CascadingDemo implements CommandLineRunner {
         Doctor doctor2 = new Doctor("Dr. Alyne");
 //        doctorRepository.save(doctor2);         // Needed because no patient assigned to doctor2, thus no cascading effect
 
-        Patient patient1 = new Patient("John Doe", 30);
+        Patient patient1 = new Patient("John Doe", 30,"johndoe@test.com", Gender.MALE);
         patient1.setDoctor(doctor1);
 //        patientRepository.save(patient1);
 
-        Patient patient2 = new Patient("Jane", 33);
+        Patient patient2 = new Patient("Jane", 33,"jane@test.com", Gender.FEMALE);
         patient2.setDoctor(doctor1);        // Doctor1 gets detached after the save(patient1) causing an exception
 //        patientRepository.save(patient2);
 

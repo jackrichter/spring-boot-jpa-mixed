@@ -1,5 +1,6 @@
 package com.demo.healthcare.demo;
 
+import com.demo.healthcare.model.Gender;
 import com.demo.healthcare.model.Patient;
 import com.demo.healthcare.repository.PatientRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -18,10 +19,10 @@ public class JpaRepositoryDemo implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Patient p1 = new Patient("John Doe Repository", 30);
+        Patient p1 = new Patient("John Doe Repository", 30,"johndoe@test.com", Gender.MALE);
         patientRepository.save(p1);
 
-        Patient p2 = new Patient("Jane", 40);
+        Patient p2 = new Patient("Jane", 40,"jane@test.com", Gender.FEMALE);
         patientRepository.save(p2);
 
         patientRepository.findAll()

@@ -29,12 +29,11 @@ public class CompositeKeyDemo implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Doctor drSmith = new Doctor("Dr. Smith");
 
-        Patient alice = new Patient("Alice Johnson", 30);
+        Patient alice = new Patient("Alice Johnson", 30, "aclice@test.com", Gender.FEMALE);
         Address address = new Address("101 Main St.", "Springfield", "IL", "873643");
         alice.setAddress(address);
         byte[] imageData = Files.readAllBytes(new ClassPathResource("/images/img.png").getFile().toPath());
         alice.setProfilePicture(imageData);
-        alice.setGender(Gender.FEMALE);
         alice.setDoctor(drSmith);
 
         MedicalRecord aliceRecord = new MedicalRecord("Allergic to penicillin");

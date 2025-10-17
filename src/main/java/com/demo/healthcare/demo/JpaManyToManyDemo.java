@@ -16,14 +16,10 @@ public class JpaManyToManyDemo implements CommandLineRunner {
 
     private final MedicineRepository medicineRepository;
     private final PrescriptionRepository prescriptionRepository;
-    private final DoctorRepository doctorRepository;
-    private final PatientRepository patientRepository;
 
-    public JpaManyToManyDemo(MedicineRepository medicineRepository, PrescriptionRepository prescriptionRepository, DoctorRepository doctorRepository, PatientRepository patientRepository) {
+    public JpaManyToManyDemo(MedicineRepository medicineRepository, PrescriptionRepository prescriptionRepository) {
         this.medicineRepository = medicineRepository;
         this.prescriptionRepository = prescriptionRepository;
-        this.doctorRepository = doctorRepository;
-        this.patientRepository = patientRepository;
     }
 
     @Override

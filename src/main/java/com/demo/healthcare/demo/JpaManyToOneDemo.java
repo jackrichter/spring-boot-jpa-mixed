@@ -1,6 +1,7 @@
 package com.demo.healthcare.demo;
 
 import com.demo.healthcare.model.Doctor;
+import com.demo.healthcare.model.Gender;
 import com.demo.healthcare.model.Patient;
 import com.demo.healthcare.repository.DoctorRepository;
 import com.demo.healthcare.repository.PatientRepository;
@@ -26,11 +27,11 @@ public class JpaManyToOneDemo implements CommandLineRunner {
         Doctor doctor2 = new Doctor("Dr. Alyne");
         doctorRepository.save(doctor2);
 
-        Patient patient1 = new Patient("John Doe", 30);
+        Patient patient1 = new Patient("John Doe", 30,"johndoe@test.com", Gender.MALE);
         patient1.setDoctor(doctor1);
         patientRepository.save(patient1);
 
-        Patient patient2 = new Patient("Jane", 33);
+        Patient patient2 = new Patient("Jane", 33,"jane@test.com", Gender.FEMALE);
         patient2.setDoctor(doctor1);
         patientRepository.save(patient2);
     }

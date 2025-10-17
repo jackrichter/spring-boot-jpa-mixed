@@ -1,5 +1,6 @@
 package com.demo.healthcare.demo;
 
+import com.demo.healthcare.model.Gender;
 import com.demo.healthcare.model.Patient;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -16,10 +17,10 @@ public class JpaEntityManagerDemoFind implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        Patient john = new Patient("John Doe", 30);
+        Patient john = new Patient("John Doe", 30,"johndoe@test.com", Gender.MALE);
         entityManager.persist(john);
 
-        Patient jane = new Patient("Jane", 20);
+        Patient jane = new Patient("Jane", 20,"jane@test.com", Gender.FEMALE);
         entityManager.persist(jane);
 
         Patient patientJohn = entityManager.find(Patient.class, 1L);
@@ -28,7 +29,7 @@ public class JpaEntityManagerDemoFind implements CommandLineRunner {
         Patient patientJane = entityManager.find(Patient.class, 2L);
         System.out.println("patient Jane: " + patientJane.getId());
 
-        Patient marie = new Patient("Marie", 28);
+        Patient marie = new Patient("Marie", 28,"marie@test.com", Gender.FEMALE);
         entityManager.persist(marie);
 
         // Reference. For lazy fetching

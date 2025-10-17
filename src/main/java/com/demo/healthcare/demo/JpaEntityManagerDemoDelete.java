@@ -1,5 +1,6 @@
 package com.demo.healthcare.demo;
 
+import com.demo.healthcare.model.Gender;
 import com.demo.healthcare.model.Patient;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -16,7 +17,7 @@ public class JpaEntityManagerDemoDelete implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        Patient patient = new Patient("John Doe", 30);
+        Patient patient = new Patient("John Doe", 30, "johndoe@test.com", Gender.MALE);
         entityManager.persist(patient);
 
         entityManager.remove(patient);      // For Managed Entities only!

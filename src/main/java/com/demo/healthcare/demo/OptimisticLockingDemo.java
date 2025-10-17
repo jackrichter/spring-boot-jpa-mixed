@@ -21,7 +21,7 @@ public class OptimisticLockingDemo implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Doctor drSmith = new Doctor("Dr. Smith");
 
-        Patient alice = new Patient("Alice Johnson", 30);
+        Patient alice = new Patient("Alice Johnson", 30,"alicejohnson@test.com", Gender.FEMALE);
         alice.setGender(Gender.FEMALE);
         alice.setDoctor(drSmith);
 

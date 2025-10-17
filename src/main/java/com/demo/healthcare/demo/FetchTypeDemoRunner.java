@@ -1,6 +1,7 @@
 package com.demo.healthcare.demo;
 
 import com.demo.healthcare.model.Doctor;
+import com.demo.healthcare.model.Gender;
 import com.demo.healthcare.model.MedicalRecord;
 import com.demo.healthcare.model.Patient;
 import com.demo.healthcare.repository.DoctorRepository;
@@ -27,8 +28,8 @@ public class FetchTypeDemoRunner implements CommandLineRunner {
 
         Doctor doctor = new Doctor("Dr. Smith");
 
-        Patient p1 = new Patient("John", 30);
-        Patient p2 = new Patient("Alice", 25);
+        Patient p1 = new Patient("John", 30,"johndoe@test.com", Gender.MALE);
+        Patient p2 = new Patient("Alice", 25,"alice@test.com", Gender.FEMALE);
         p1.setDoctor(doctor);
         p2.setDoctor(doctor);
 
