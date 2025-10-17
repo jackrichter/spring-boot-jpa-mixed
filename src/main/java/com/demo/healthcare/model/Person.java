@@ -2,7 +2,9 @@ package com.demo.healthcare.model;
 
 import jakarta.persistence.*;
 
-@Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.JOINED)     // JOINED Strategy
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)     // SINGLE-TABLE Strategy
+@DiscriminatorColumn(name = "person_type")
 @Entity
 public abstract class Person {
 
