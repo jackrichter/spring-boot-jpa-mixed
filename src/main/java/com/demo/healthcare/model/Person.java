@@ -3,13 +3,14 @@ package com.demo.healthcare.model;
 import jakarta.persistence.*;
 
 //@Inheritance(strategy = InheritanceType.JOINED)     // JOINED Strategy
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)     // SINGLE-TABLE Strategy
-@DiscriminatorColumn(name = "person_type")
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)     // SINGLE-TABLE Strategy
+//@DiscriminatorColumn(name = "person_type")                // SINGLE-TABLE Strategy
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)     // TABLE-PER-CLASS Strategy
 @Entity
-public abstract class Person {
+public abstract class Person {      // abstract is useful in TABLE-PER-CLASS Strategy
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)     // Cannot use IDENTITY in TABLE-PER-CLASS strategy !
     private Long id;
     private String name;
     private int age;
