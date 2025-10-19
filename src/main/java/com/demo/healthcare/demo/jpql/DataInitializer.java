@@ -52,7 +52,7 @@ public class DataInitializer implements CommandLineRunner {
         Patient alice = new Patient("Alice", 38, "alice@email.com", Gender.FEMALE);
         patientRepository.save(alice);
 
-        QueryParameters queryParameters = new QueryParameters();
+        QueryParameters queryParameters = new QueryParameters(patientRepository);
         queryParameters.execute(entityManager);
     }
 }
