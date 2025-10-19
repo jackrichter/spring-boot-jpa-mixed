@@ -37,6 +37,14 @@ public class QueryParameters {
 
         // USING REPOSITORIES
         List<Patient> p = patientRepository.findByNameAndGender("Alice", Gender.FEMALE);
-        System.out.println("SIZE: " + p.size());
+        System.out.println("SIZE of p: " + p.size());   // -> 1
+        List<Patient> p1 = patientRepository.findByName("John");   // -> 0 (Obs!)
+        System.out.println("SIZE of p1: " + p1.size());
+        List<Patient> p2 = patientRepository.findByName("John Doe");
+        System.out.println("SIZE of p2: " + p2.size());   // -> 1
+        Patient p3 = patientRepository.findByDoctorName("Dr. Smith");
+        System.out.println("Patient found by doctorName: " + (p3 != null ? true : false));  // -> true
+        System.out.println("Exists by email: " + patientRepository.existsByEmail("john111@email.com"));  // -> false // -> true
+        System.out.println("Count by age: " + patientRepository.countByAge(30));  // -> 1
     }
 }
