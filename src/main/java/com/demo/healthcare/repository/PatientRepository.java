@@ -4,6 +4,7 @@ import com.demo.healthcare.model.Gender;
 import com.demo.healthcare.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -35,4 +36,24 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     boolean existsByEmail(String email);
 
     int countByAge(int age);
+
+    // COMPARISON OPERATORS (<>, >, <, <= >=, =)
+    @Query("select p from Patient p where p.age > :minAge")
+    List<Patient> findOlderThan(@Param("minAge") int age);
+
+    // PATTERN MATCHING
+    @Query("select p from Patient p where p.name not like :prefix%")
+    List<Patient> findByNameNotStartingWith(@Param("prefix") String prefix);
+
+    @Query("select p from Patient p where p.gender in :genders")
+    List<Patient> findByGenders(@Param("genders") List<Gender> genders);
+
+    @Query("select p from Patient p where p.age between :start and :end")
+    List<Patient> findByAgeRange(@Param("start") int start, @Param("end") int end);
+
+    @Query("select p from Patient p where p.doctor is null")
+    List<Patient> findUnassignedDoctorForPatient();
+
+    @Query("select p from Patient p where p.doctor is not null")
+    List<Patient> findPatientsWithAssignedDoctor();
 }
