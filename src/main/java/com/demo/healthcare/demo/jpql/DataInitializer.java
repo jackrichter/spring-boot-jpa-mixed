@@ -13,10 +13,8 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
-//@Component
-public class BasicJPQLQueries implements CommandLineRunner {
+@Component
+public class DataInitializer implements CommandLineRunner {
 
     private final DoctorRepository doctorRepository;
     private final PatientRepository patientRepository;
@@ -26,7 +24,7 @@ public class BasicJPQLQueries implements CommandLineRunner {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public BasicJPQLQueries(DoctorRepository doctorRepository, PatientRepository patientRepository, PersonRepository personRepository, MedicalRecordRepository medicalRecordRepository) {
+    public DataInitializer(DoctorRepository doctorRepository, PatientRepository patientRepository, PersonRepository personRepository, MedicalRecordRepository medicalRecordRepository) {
         this.doctorRepository = doctorRepository;
         this.patientRepository = patientRepository;
         this.personRepository = personRepository;
@@ -53,29 +51,5 @@ public class BasicJPQLQueries implements CommandLineRunner {
 
         Patient alice = new Patient("Alice", 38, "alice@email.com", Gender.FEMALE);
         patientRepository.save(alice);
-
-        // JPQL Queries
-        List<Patient> patients = entityManager.createQuery("" +
-                "select p from Patient p", Patient.class).getResultList();
-
-        System.out.println("Patients count " + patients.size());
-        patients.forEach(patient -> {
-            System.out.println(patient.getName() + " " + patient.getGender());
-        });
-
-        // Filtering
-        List<Patient> femalePatients = entityManager.createQuery(
-                "select p from Patient p where p.gender = :gender", Patient.class)
-                .setParameter("gender", Gender.FEMALE)
-                .getResultList();
-
-        System.out.println("Female Patients count " + femalePatients.size());
-        femalePatients.forEach(fp -> {
-            System.out.println(fp.getName());
-        });
-
-        // Alternative to parametrized query with enum
-        entityManager.createQuery(
-                "select p from Patient p where p.gender = " + Gender.FEMALE, Patient.class);
     }
 }
