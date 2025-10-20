@@ -66,4 +66,16 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     @Query("select p from Patient p where p.gender = ?1 order by p.age desc")
     List<Patient> findByGenderSortByAgeDesc(Gender gender);
+
+    // INNER JOIN
+    @Query("select p from Patient p inner join p.doctor d where d.specialization = :spec")
+    List<Patient> findPatientsWithADoctor(@Param("spec") String specialization);
+
+    // LEFT JOIN
+    @Query("select p from Patient p left join p.doctor d")
+    List<Patient> findPatientsWithOrWithoutAssignedDoctor();
+
+    // JOIN FETCH (will include Doctor data!)
+    @Query("select p from Patient p join fetch p.doctor d")
+    List<Patient> findPatientsWithADoctorJoinFetch();
 }
