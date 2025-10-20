@@ -56,4 +56,14 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     @Query("select p from Patient p where p.doctor is not null")
     List<Patient> findPatientsWithAssignedDoctor();
+
+    // SORTING RESULTS
+    @Query("select p from Patient p order by p.age asc")
+    List<Patient> sortByAgeAsc();
+
+    @Query("select p from Patient p order by p.age desc, p.name asc")
+    List<Patient> sortByAgeDescAndNameAsc();
+
+    @Query("select p from Patient p where p.gender = ?1 order by p.age desc")
+    List<Patient> findByGenderSortByAgeDesc(Gender gender);
 }
