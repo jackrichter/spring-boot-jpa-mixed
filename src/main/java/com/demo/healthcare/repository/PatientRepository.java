@@ -76,6 +76,6 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     List<Patient> findPatientsWithOrWithoutAssignedDoctor();
 
     // JOIN FETCH (will include Doctor data!)
-    @Query("select p from Patient p join fetch p.doctor d")
+    @Query("select p from Patient p join fetch p.doctor d ")
     List<Patient> findPatientsWithADoctorJoinFetch();
 }
