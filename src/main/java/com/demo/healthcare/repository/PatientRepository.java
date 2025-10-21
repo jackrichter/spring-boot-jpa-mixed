@@ -2,7 +2,9 @@ package com.demo.healthcare.repository;
 
 import com.demo.healthcare.model.Gender;
 import com.demo.healthcare.model.Patient;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -82,4 +84,16 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     // AGGREGATION AND GROUPING
     @Query("select p.gender, avg(p.age) from Patient p group by p.gender")
     List<Object[]> averageAgeByGender();
+
+    // BULK UPDATE
+    @Modifying          // Update/Delete queries must be annotated as modifying data!
+    @Transactional      // Data modifying queries must be executed within a transaction!
+    @Query("update Patient p set p.age = p.age + 1 where p.gender = :gender")
+    int bulkIncreaseAgeByGender(@Param("gender") Gender gender);
+
+    // BULK DELETE
+    @Modifying
+    @Transactional
+    @Query("delete from Patient p where p.age < ?1")
+    int bulkDeleteByAge(int age);
 }

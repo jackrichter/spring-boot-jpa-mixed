@@ -64,23 +64,31 @@ public class LearnQueries {
 //        List<Patient> joinFetch = patientRepository.findPatientsWithADoctorJoinFetch();
 //        joinFetch
 //                .forEach(p -> System.out.println("Join Fetch Data: " + p.getName() + " " + p.getDoctor().getName()));
+//
+//        // AGGREGATION
+//        System.out.println("AGGREGATION");
+//        List<Object[]> results = doctorRepository.countOfPatientsByDoctorSpecialization("Cardiology");
+//        for (Object[] row : results) {
+//            String specialization = row[0].toString();
+//            Long patientCount = (Long) row[1];
+//            System.out.println("SPEC: " +  specialization + " | Patients: " + patientCount);
+//        }
+//
+//        // AGGREGATION AND GROUPING
+//        System.out.println("AGGREGATION WITH GROUPING");
+//        List<Object[]> resultsAgeAvg = patientRepository.averageAgeByGender();
+//        for (Object[] row : resultsAgeAvg) {
+//            Gender gender = (Gender) row[0];
+//            Double avgAge = (Double) row[1];
+//            System.out.println("GENDER: " +  gender + " | avgAge: " + avgAge);
+//        }
 
-        // AGGREGATION
-        System.out.println("AGGREGATION");
-        List<Object[]> results = doctorRepository.countOfPatientsByDoctorSpecialization("Cardiology");
-        for (Object[] row : results) {
-            String specialization = row[0].toString();
-            Long patientCount = (Long) row[1];
-            System.out.println("SPEC: " +  specialization + " | Patients: " + patientCount);
-        }
+        // BULK UPDATE
+        int count = patientRepository.bulkIncreaseAgeByGender(Gender.MALE);
+        System.out.println("BULK UPDATE DONE: " + count);
 
-        // AGGREGATION AND GROUPING
-        System.out.println("AGGREGATION WITH GROUPING");
-        List<Object[]> resultsAgeAvg = patientRepository.averageAgeByGender();
-        for (Object[] row : resultsAgeAvg) {
-            Gender gender = (Gender) row[0];
-            Double avgAge = (Double) row[1];
-            System.out.println("GENDER: " +  gender + " | avgAge: " + avgAge);
-        }
+        // BULK DELETE
+        int deleteCount = patientRepository.bulkDeleteByAge(32);
+        System.out.println("BULK DELETE DONE: " + deleteCount);
     }
 }
