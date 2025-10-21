@@ -78,4 +78,8 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     // JOIN FETCH (will include Doctor data!)
     @Query("select p from Patient p join fetch p.doctor d ")
     List<Patient> findPatientsWithADoctorJoinFetch();
+
+    // AGGREGATION AND GROUPING
+    @Query("select p.gender, avg(p.age) from Patient p group by p.gender")
+    List<Object[]> averageAgeByGender();
 }
