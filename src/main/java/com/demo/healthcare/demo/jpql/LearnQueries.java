@@ -82,13 +82,17 @@ public class LearnQueries {
 //            Double avgAge = (Double) row[1];
 //            System.out.println("GENDER: " +  gender + " | avgAge: " + avgAge);
 //        }
+//
+//        // BULK UPDATE
+//        int count = patientRepository.bulkIncreaseAgeByGender(Gender.MALE);
+//        System.out.println("BULK UPDATE DONE: " + count);
+//
+//        // BULK DELETE
+//        int deleteCount = patientRepository.bulkDeleteByAge(32);
+//        System.out.println("BULK DELETE DONE: " + deleteCount);
 
-        // BULK UPDATE
-        int count = patientRepository.bulkIncreaseAgeByGender(Gender.MALE);
-        System.out.println("BULK UPDATE DONE: " + count);
-
-        // BULK DELETE
-        int deleteCount = patientRepository.bulkDeleteByAge(32);
-        System.out.println("BULK DELETE DONE: " + deleteCount);
+        // CONSTRUCTOR EXPRESSIONS QUERIES (Good for fetching data straight to a DTO!)
+        List<PatientDTO> summaries = patientRepository.getPatientDTO();
+        summaries.forEach(System.out::println);
     }
 }

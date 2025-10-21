@@ -1,5 +1,6 @@
 package com.demo.healthcare.repository;
 
+import com.demo.healthcare.demo.jpql.PatientDTO;
 import com.demo.healthcare.model.Gender;
 import com.demo.healthcare.model.Patient;
 import jakarta.transaction.Transactional;
@@ -96,4 +97,8 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     @Transactional
     @Query("delete from Patient p where p.age < ?1")
     int bulkDeleteByAge(int age);
+
+    // CONSTRUCTOR EXPRESSIONS QUERIES (Good for fetching data straight to a DTO!)
+    @Query("select new com.demo.healthcare.demo.jpql.PatientDTO(p.name, p.age) from Patient p")
+    List<PatientDTO> getPatientDTO();
 }
