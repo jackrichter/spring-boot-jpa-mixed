@@ -101,4 +101,6 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     // CONSTRUCTOR EXPRESSIONS QUERIES (Good for fetching data straight to a DTO!)
     @Query("select new com.demo.healthcare.demo.jpql.PatientDTO(p.name, p.age) from Patient p")
     List<PatientDTO> getPatientDTO();
+
+    // NAMED QUERY
 }

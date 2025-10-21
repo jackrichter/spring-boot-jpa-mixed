@@ -59,4 +59,13 @@ public abstract class Person {      // abstract is useful in TABLE-PER-CLASS Str
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

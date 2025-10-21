@@ -9,6 +9,10 @@ import java.util.List;
 
 @Entity
 //@Table(name = "new_patients")
+@NamedQuery(
+        name = "Patient.findByNameStartingWith",
+        query = "select p from Patient p where p.name like :prefix"
+)
 public class Patient extends Person {
 
     @Embedded
@@ -109,5 +113,10 @@ public class Patient extends Person {
         else if (age <= 19) return "Teen";
         else if (age <= 59) return "Adult";
         else return "Senior";
+    }
+
+    @Override
+    public String toString() {
+        return "Patient" + super.toString();
     }
 }
