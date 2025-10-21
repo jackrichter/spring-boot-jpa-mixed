@@ -102,5 +102,6 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     @Query("select new com.demo.healthcare.demo.jpql.PatientDTO(p.name, p.age) from Patient p")
     List<PatientDTO> getPatientDTO();
 
-    // NAMED QUERY
+    // Using a NAMED QUERY in Repository
+    List<Patient> findByNameStartingWith(@Param("prefix") String prefix);
 }

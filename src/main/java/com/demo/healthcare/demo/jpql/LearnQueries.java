@@ -97,9 +97,12 @@ public class LearnQueries {
 */
         // NAMED QUERY
         System.out.println("NAMED QUERIES");
-        List<Patient> patientList = entityManager.createNamedQuery("Patient.findByNameStartingWith")
-                .setParameter("prefix", "J%")
-                .getResultList();
+//        List<Patient> patientList = entityManager.createNamedQuery("Patient.findByNameStartingWith")
+//                .setParameter("prefix", "J%")
+//                .getResultList();
+
+        // Alt. Calling the Named Query through the PatientRepository:
+        List<Patient> patientList = patientRepository.findByNameStartingWith("J%");
         patientList.forEach(System.out::println);
     }
 }
