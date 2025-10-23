@@ -94,15 +94,15 @@ public class LearnQueries {
         // CONSTRUCTOR EXPRESSIONS QUERIES (Good for fetching data straight to a DTO!)
         List<PatientDTO> summaries = patientRepository.getPatientDTO();
         summaries.forEach(System.out::println);
-*/
         // NAMED QUERY
         System.out.println("NAMED QUERIES");
-//        List<Patient> patientList = entityManager.createNamedQuery("Patient.findByNameStartingWith")
-//                .setParameter("prefix", "J%")
-//                .getResultList();
+        List<Patient> patientList = entityManager.createNamedQuery("Patient.findByNameStartingWith")
+                .setParameter("prefix", "J%")
+                .getResultList();
 
         // Alt. Calling the Named Query through the PatientRepository:
-        List<Patient> patientList = patientRepository.findByNameStartingWith("J%");
-        patientList.forEach(System.out::println);
+        List<Patient> patientList2 = patientRepository.findByNameStartingWith("J%");
+        patientList2.forEach(System.out::println);
+*/
     }
 }
