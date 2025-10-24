@@ -13,7 +13,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public class DataInitializer implements CommandLineRunner {
 
     private final DoctorRepository doctorRepository;

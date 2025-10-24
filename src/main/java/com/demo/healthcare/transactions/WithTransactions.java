@@ -10,7 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 
-@Component
+//@Component
 public class WithTransactions implements CommandLineRunner {
 
     private final PatientRepository patientRepository;
